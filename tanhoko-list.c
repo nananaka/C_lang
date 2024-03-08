@@ -5,7 +5,7 @@ typedef struct {
     int *p_position; /* 配列番号 */
 }list;
 
-/*gitについも勉強していく*/
+
 
 int main() {
     list hogeta1;
