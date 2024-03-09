@@ -13,7 +13,7 @@ int main() {
     
     
     data1.value = 1000;
-    data2.p_next = &hogeta2.value;
+    data2.p_next = &data2.value;
     data2.value = 500;
     printf("value %d\n", data1.value);
     printf("position %d\n", data1.p_next);
