@@ -10,11 +10,16 @@ typedef struct {
 int main() {
     list data1;
     list data2;
+    list data3;
     
     
-    data1.value = 1000;
-    data2.p_next = &data2.value;
-    data2.value = 500;
+    data1.value   = 1;
+    data1.p_next  = &data2;
+    data2.value   = 2;
+    data2.p_next  = &data3;
+    data3.value   = 3;
+    data3.p_next  = NULL; 
+
     printf("value %d\n", data1.value);
     printf("position %d\n", data1.p_next);
 
