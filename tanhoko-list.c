@@ -1,18 +1,29 @@
 #include <stdio.h>
 
 typedef struct {
-    int value; /* 値*/
-    int *p_next; /* 配列番号 */
+    int value; /*値*/
+    int *p_next; /* 次のデータへのポインタ */
 }list;
+
+/*リストの中身をすべて表示する関数*/
+void show_all_data(list *p_list_head){
+
+/*data1のvalueを取り出す*/
+printf("%d \n",p_list_head->value);
+printf("Pass\n");
+
+}
 
 
 
 int main() {
+    list *p_list_head; /*リストの先頭ポインタ*/
     list data1;
     list data2;
     list data3;
     
     
+    p_list_head   = &data1;
     data1.value   = 1;
     data1.p_next  = &data2;
     data2.value   = 2;
@@ -20,9 +31,8 @@ int main() {
     data3.value   = 3;
     data3.p_next  = NULL; 
 
-    printf("value %d\n", data1.value);
-    printf("position %d\n", data1.p_next);
-
+    show_all_data(p_list_head);
+   
 
     return 0;
 }
