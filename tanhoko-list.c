@@ -8,10 +8,12 @@ typedef struct {
 /*リストの中身をすべて表示する関数*/
 void show_all_data(list *p_list_head){
 
-/*data1のvalueを取り出す*/
-printf("%d \n",p_list_head->value);
-printf("Pass\n");
-
+    list *p_list_pointer = p_list_head;
+    
+    while(p_list_pointer != NULL){
+        printf("%d \n",p_list_pointer->value);
+        p_list_pointer = p_list_pointer->p_next;
+    }
 }
 
 
