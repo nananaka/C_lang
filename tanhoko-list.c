@@ -21,7 +21,7 @@ void show_all_data(list *p_list_head){
 
 
 /*リストの最後尾にデータを加える*/
-void push_data(list *p_list_head, list *p_new_data){
+void push_data(list *p_list_head, list *p_new_data,int input_value){
 
     /*push処理*/
     list *p_list_pointer = p_list_head;
@@ -33,7 +33,7 @@ void push_data(list *p_list_head, list *p_new_data){
     p_list_pointer->p_next = p_new_data ;/*最後尾の状態となったp->nextにp_new_dataを格納*/
     
     p_new_data->p_next = NULL;
-    p_new_data->value = 4;
+    p_new_data->value = input_value;
 
     printf("\n%dの値をリストの最後尾にデータを追加しました。\n\n",p_new_data->value); 
 
@@ -91,16 +91,13 @@ int main() {
     data3.value   = 3;
     data3.p_next  = NULL; 
 
-    /*リストを表示*/
-    show_all_data(p_list_head);
-
-    /**/
-    push_data(p_list_head, &data4);
-    reference_data(p_list_head, 3);
-    /*printf("push完了")；*/
-    show_all_data(p_list_head);
-    delete_data(p_list_head, 3); /*3番目のデータを削除*/
-    show_all_data(p_list_head);
+    
+    show_all_data(p_list_head);    /*リストを表示*/
+    push_data(p_list_head, &data4,4);/*末尾に要素を追加*/
+    reference_data(p_list_head, 3);/*3の値が格納されている場所を表示*/
+    show_all_data(p_list_head);    /*リストを表示*/
+    delete_data(p_list_head, 3);   /*3番目のデータを削除*/
+    show_all_data(p_list_head);    /*リストを表示*/
 
     return 0;
 }
