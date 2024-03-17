@@ -1,3 +1,5 @@
+// -*- coding: utf-8 -*-
+
 #include <stdio.h>
 
 typedef struct list_ {
@@ -44,7 +46,7 @@ void push_data(list *p_list_head, list *p_new_data){
 }
 
 
-/* 220240310 要素を検索関数作成中 */
+/*指定したvalueがリストの何番目にあるかを表示する*/
 void reference_data(list *p_list_head, int reference_value){
     list *p_list_pointer = p_list_head;
 
@@ -58,7 +60,24 @@ void reference_data(list *p_list_head, int reference_value){
     }
 }
 
+/*要素の順番を指定し、その値を削除する*/
+void delete_data(list *p_list_head, int list_order_number){
+    list *p_list_pointer = p_list_head;
+    int i_element = 1; /*リストの要素の順序*/
 
+
+    /*削除したいデータの一つ手前までp_list_pointerを移動*/
+    while(i_element <= list_order_number - 2){
+         i_element ++;
+         p_list_pointer = p_list_pointer->p_next;   
+    }
+    /*whileを抜けた時点でp_list_pointerが削除したいデータの一つ手前をさした状態となる*/
+
+    /*削除したいデータの一つ手前のデータのp_nextを削除したいデータの一つ後につなげる。*/
+    p_list_pointer->p_next = (p_list_pointer->p_next)->p_next;
+    printf("The %d data has been deleted.\n",list_order_number);
+
+}
 
 
 int main() {
@@ -84,7 +103,8 @@ int main() {
     reference_data(p_list_head, 3);
     /*printf("push完了")；*/
     show_all_data(p_list_head);
-   
+    delete_data(p_list_head, 3); /*3番目のデータを削除*/
+    show_all_data(p_list_head);
 
     return 0;
 }
