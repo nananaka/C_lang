@@ -1,12 +1,16 @@
 #include <stdio.h>
 
 
+/*list型の定義*/
 typedef struct list_ {
     int value; /*値*/
     struct list_ *p_next; /* 次のデータへのポインタ */
 }list;
 
-/*リストの中身をすべて表示する*/
+/*プロトタイプ宣言*/
+list *move_pointer(list *p_list_pointer, int list_order_number);
+
+/*リストの中身をすべて表示*/
 void show_all_data(list *p_list_head){
 
     list *p_list_pointer = p_list_head;
@@ -21,7 +25,7 @@ void show_all_data(list *p_list_head){
 }
 
 
-/*リストの最後尾にデータを加える*/
+/*リストの最後尾にデータを追加*/
 void push_data(list *p_list_head, list *p_new_data,int input_value){
 
     /*push処理*/
@@ -58,15 +62,10 @@ void reference_data(list *p_list_head, int reference_value){
 /*要素の順番を指定し、その値を削除する*/
 void delete_data(list *p_list_head, int list_order_number){
     list *p_list_pointer = p_list_head;
-    int i_element = 1; /*リストの要素の順序*/
+    
+    /*削除したいデータの一つ手前の要素へポインタを移動する*/
+    p_list_pointer = move_pointer(p_list_pointer,list_order_number -1);
 
-
-    /*削除したいデータの一つ手前までp_list_pointerを移動*/
-    while(i_element <= list_order_number - 2){
-         i_element ++;
-         p_list_pointer = p_list_pointer->p_next;   
-    }
-    /*whileを抜けた時点でp_list_pointerが削除したいデータの一つ手前をさした状態となる*/
 
     /*削除したいデータの一つ手前のデータのp_nextを削除したいデータの一つ後につなげる。*/
     p_list_pointer->p_next = (p_list_pointer->p_next)->p_next;
@@ -77,32 +76,35 @@ void delete_data(list *p_list_head, int list_order_number){
 /*要素の順番を指定し、データを挿入する*/
 void insert_data(list *p_list_head, int list_order_number, list *p_new_data,int input_value){
     list *p_list_pointer = p_list_head;
-    int i_element = 1; /*リストの要素の順序*/
+    /*int i_element = 1; リストの要素の順序*/
     p_new_data->value = input_value; /*valueに値を追加*/
 
-    /*格納したい場所のの一つ手前までp_list_pointerを移動*/
-    while(i_element <= list_order_number - 2){
-         i_element ++;
-         p_list_pointer = p_list_pointer->p_next;   
-    }
-    /*whileを抜けた時点でp_list_pointerが削除したいデータの一つ手前を指した状態となる*/
+    /*ポインタを指定した場所の一つ手前まで移動させる*/
+    p_list_pointer = move_pointer(p_list_pointer,list_order_number -1);
+
     
     p_new_data->p_next =  p_list_pointer->p_next;/*新しく追加したデータの先のデータをつなげる*/
-    p_list_pointer->p_next = p_new_data;                   /*新しく追加したデータの前にデータをつなげる*/  
+    p_list_pointer->p_next = p_new_data;         /*新しく追加したデータの前にデータをつなげる*/  
 
 
     printf("\n☆ %d番目に%dを挿入しました。\n\n",list_order_number,input_value);
 
 }
 
+/*指定した要素のポインタを返す*/
+list *move_pointer(list *p_list_pointer, int list_order_number){
+    int i_element = 1;
+    while(i_element <= list_order_number - 1){
+         i_element ++;
+         p_list_pointer = p_list_pointer->p_next;   
+    }
+    return p_list_pointer;
+}
+
 int main() {
 
     list *p_list_head; /*リストの先頭ポインタ*/
-    list data1;
-    list data2;
-    list data3;
-    list data4;
-    list data5;
+    list data1,data2,data3,data4,data5;
     
     /*リストを作成*/
     p_list_head   = &data1;
