@@ -18,6 +18,8 @@ int main() {
     printf("value %d\n", data1.value);
     printf("position %d\n", data1.p_next);
 
+ /* ブランチの実験でコメントを追加した。*/
+
 
     return 0;
 }
